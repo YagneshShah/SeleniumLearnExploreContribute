@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Note: All tests mentioned here are just for reference purpose & they 
+	do not exist in 'src', as this file is meant for template purpose. Based 
+	on our context we need to update test names appropriately. -->
+
+<suite name="Web Regression LoginLogout" parallel="false">
+
+	<test name="IncorrectUsernamePasswordCombos">
+		<groups>
+			<run>
+				<include name="loginlogout" />
+			</run>
+		</groups>
+		<classes>
+			<class name="webMainScripts.loginLogout.IncorrectUsernamePasswordCombos" />
+		</classes>
+	</test> <!-- Test1 : only tests which belongs to annotation group "loginlogout" -->
+
+	<test name="LoginReliabilityAndSigninAgainCheck">
+		<groups>
+			<run>
+				<include name="loginlogout" />
+			</run>
+		</groups>
+		<classes>
+			<class
+				name="webMainScripts.loginLogout.LoginReliabilityAndSigninAgainCheck" />
+		</classes>
+	</test> <!-- Test2 : only tests which belongs to annotation group "loginlogout" -->
+
+
+</suite> <!-- Suite -->
