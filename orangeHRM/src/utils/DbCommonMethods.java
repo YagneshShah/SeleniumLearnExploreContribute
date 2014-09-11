@@ -1,6 +1,6 @@
 /*
  * Date: September 1st 2014
- * Author: Yagnesh Shah   
+ * Author: Adil Imroz
  * Twitter handle: @YagneshHShah
  * Organization: Moolya Software Testing Pvt Ltd
  * License Type: MIT
