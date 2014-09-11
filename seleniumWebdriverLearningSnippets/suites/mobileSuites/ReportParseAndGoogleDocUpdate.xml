@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="GoogleDocUpdate" parallel="false">
+      
+  <test name="ReportParseGoogleUpdate">
+    <classes>
+      <class name="utils.ReportParseGoogleUpdate"/>
+    </classes>
+  </test> <!-- Test1 -->
+  
+  </suite> <!-- Suite -->
