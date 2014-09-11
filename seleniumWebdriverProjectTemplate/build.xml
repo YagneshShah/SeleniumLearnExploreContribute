@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="novopayBoi" default="clean" basedir=".">
+
+	<!-- cleaning the destination folders -->
+	<target name="clean">
+        <echo message="deleting existing build directory"/>
+        <delete dir="${test.dest}"/>
+    </target>
+	
+	<target name="run">
+	    <ant antfile="masterBuildFiles/buildXYZ_Template.xml" target="run" />
+		<!-- keep calling antfile for any number of child build.xml as you wish as follows: 
+	    
+	    <ant antfile="masterBuildFiles/build1_WebSanity.xml" target="run" />
+	    <ant antfile="masterBuildFiles/build2_WebRegression.xml" target="run" />
+	    
+	    -->
+	</target>
+	
+</project>

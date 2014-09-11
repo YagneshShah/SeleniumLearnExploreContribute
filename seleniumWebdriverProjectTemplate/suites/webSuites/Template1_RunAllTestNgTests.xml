@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Note: All tests mentioned here are just for reference purpose & they do not exist in 'src', as this file is meant for template purpose. Based on our context we need to update test names appropriately. -->
+
+<suite name="Web Regression LoginLogout" parallel="false">
+
+	<test name="IncorrectUsernamePasswordCombos">
+		<classes>
+			<class name="webMainScripts.loginLogout.IncorrectUsernamePasswordCombos" />
+		</classes>
+	</test> <!-- Test1 -->
+
+	<test name="LoginReliabilityAndSigninAgainCheck">
+		<classes>
+			<class
+				name="webMainScripts.loginLogout.LoginReliabilityAndSigninAgainCheck" />
+		</classes>
+	</test> <!-- Test2 -->
+
+	<test name="LogoutAndSessionExpiresOnBackButton">
+		<classes>
+			<class
+				name="webMainScripts.loginLogout.LogoutAndSessionExpiresOnBackButton" />
+		</classes>
+	</test> <!-- Test3 -->
+
+	<test name="PasswordMaskedAndAssertAllElements">
+		<classes>
+			<class
+				name="webMainScripts.loginLogout.PasswordMaskedAndAssertAllElements" />
+		</classes>
+	</test> <!-- Test4 -->
+
+	<test name="ResetPasswordAndLogin">
+		<classes>
+			<class name="webMainScripts.loginLogout.ResetPasswordAndLogin" />
+		</classes>
+	</test> <!-- Test5 -->
+
+	<test name="ResetPasswordAndLoginWithOldPassword">
+		<classes>
+			<class
+				name="webMainScripts.loginLogout.ResetPasswordAndLoginWithOldPassword" />
+		</classes>
+	</test> <!-- Test6 -->
+
+	<test name="ResetPasswordErrorHandlingMessageValidation">
+		<classes>
+			<class
+				name="webMainScripts.loginLogout.ResetPasswordErrorHandlingMessageValidation" />
+		</classes>
+	</test> <!-- Test7 -->
+
+	<test name="ValidLoginCheck">
+		<classes>
+			<class name="webMainScripts.loginLogout.ValidLoginCheck" />
+		</classes>
+	</test> <!-- Test8 -->
+
+
+</suite> <!-- Suite -->
