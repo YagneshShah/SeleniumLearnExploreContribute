@@ -47,9 +47,9 @@ public class ReportParseGoogleUpdate {
 	public static void ReportParsingGoogleDocUpdate() throws IOException, ServiceException {
 		System.out.println("Script to parse test report and update google doc with results");
 		//Auth to access google doc
-		spreadSheetDemo = new ReportParseGoogleUpdate("abc@gmail.com", "abc123"); //gmail account via which doc will be accessed for updating test results
+		spreadSheetDemo = new ReportParseGoogleUpdate("abc@gmail.com", "password"); //gmail account via which doc will be accessed for updating test results
 
-		spreadsheet = spreadSheetDemo.getSpreadSheet(1);//give index to select the spreadsheet from the folder
+		spreadsheet = spreadSheetDemo.getSpreadSheet(0);//give index to select the spreadsheet from the folder
 
 		worksheetEntry = spreadsheet.getWorksheets().get(0); //providing index to access the desired worksheet
 
@@ -64,7 +64,7 @@ public class ReportParseGoogleUpdate {
 		CellFeed feed = service.query(query, CellFeed.class);
 
 		//Parsing the Test report from desired folder
-		File input = new File("/Users/Yash/git/SeleniumLearnExploreContribute/seleniumWebdriverProjectTemplate/test-output/emailable-report.html");
+		File input = new File("../seleniumWebdriverProjectTemplate/test-output/emailable-report.html");
 		System.out.println("Starting ....");
 		Document doc = Jsoup.parse(input,null);
 		System.out.println("midway ....");
