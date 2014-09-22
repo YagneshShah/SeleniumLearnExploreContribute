@@ -64,7 +64,7 @@ public class ReportParseGoogleUpdate {
 		CellFeed feed = service.query(query, CellFeed.class);
 
 		//Parsing the Test report from desired folder
-		File input = new File("/Users/Yash/git/SeleniumLearnExploreContribute/seleniumWebdriverLearningSnippets/test-output/emailable-report.html");
+		File input = new File("../seleniumWebdriverLearningSnippets/test-output/emailable-report.html");
 		System.out.println("Starting ....");
 		Document doc = Jsoup.parse(input,null);
 		System.out.println("midway ....");

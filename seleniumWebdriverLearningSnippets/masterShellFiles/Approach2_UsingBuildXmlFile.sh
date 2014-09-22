@@ -4,5 +4,5 @@
 
 
 
-cd /c/Users/Yash/git/SeleniumLearnExploreContribute/seleniumWebdriverProjectTemplate/
+cd /c/Users/Yash/git/SeleniumLearnExploreContribute/seleniumWebdriverLearningSnippets/
 ant run

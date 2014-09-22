@@ -7,8 +7,10 @@
 
 cd /c/Users/Yash/git/SeleniumLearnExploreContribute/seleniumWebdriverProjectTemplate/suites/webSuites
 
-java -cp /c/Users/Yash/Downloads/Automation/jars/new/allJars/*:/Users/Yash/git/SeleniumLearnExploreContribute/seleniumWebdriverProjectTemplate/bin org.testng.TestNG Template1_RunAllTestNgTests.xml
-java -cp /c/Users/Yash/Downloads/Automation/jars/new/allJars/*:/Users/Yash/git/SeleniumLearnExploreContribute/seleniumWebdriverProjectTemplate/bin org.testng.TestNG ReportParseAndGoogleDocUpdate.xml
+java -cp /c/Users/Yash/Downloads/Automation/jars/new/allJars/*:/Users/Yash/git/SeleniumLearnExploreContribute/seleniumWebdriverLearningSnippets/bin org.testng.TestNG Template1_RunAllTestNgTests.xml
+java -cp /c/Users/Yash/Downloads/Automation/jars/new/allJars/*:/Users/Yash/git/SeleniumLearnExploreContribute/seleniumWebdriverLearningSnippets/bin org.testng.TestNG ReportParseAndGoogleDocUpdate.xml
+java -cp /c/Users/Yash/Downloads/Automation/jars/new/allJars/*:/c/Users/Yash/git/SeleniumLearnExploreContribute/seleniumWebdriverLearningSnippets/bin org.testng.TestNG SuiteEmail.xml
 
-java -cp /c/Users/Yash/Downloads/Automation/jars/new/allJars/*:/Users/Yash/git/SeleniumLearnExploreContribute/seleniumWebdriverProjectTemplate/bin org.testng.TestNG Template2_RunSpecificTestngGroupsTest.xml
-java -cp /c/Users/Yash/Downloads/Automation/jars/new/allJars/*:/Users/Yash/git/SeleniumLearnExploreContribute/seleniumWebdriverProjectTemplate/bin org.testng.TestNG ReportParseAndGoogleDocUpdate.xml
+java -cp /c/Users/Yash/Downloads/Automation/jars/new/allJars/*:/Users/Yash/git/SeleniumLearnExploreContribute/seleniumWebdriverLearningSnippets/bin org.testng.TestNG Template2_RunSpecificTestngGroupsTest.xml
+java -cp /c/Users/Yash/Downloads/Automation/jars/new/allJars/*:/Users/Yash/git/SeleniumLearnExploreContribute/seleniumWebdriverLearningSnippets/bin org.testng.TestNG ReportParseAndGoogleDocUpdate.xml
+java -cp /c/Users/Yash/Downloads/Automation/jars/new/allJars/*:/c/Users/Yash/git/SeleniumLearnExploreContribute/seleniumWebdriverLearningSnippets/bin org.testng.TestNG SuiteEmail.xml

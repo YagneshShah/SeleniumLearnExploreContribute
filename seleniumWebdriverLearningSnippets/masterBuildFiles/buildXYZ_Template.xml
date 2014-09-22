@@ -103,42 +103,44 @@
 	
 	<!--  ========== Test executions & Generating reports using Testng utility for multiple suites ==============    -->
 	<!-- run -->
-	<target name="run" depends="compile">
-		
+	<target name="run" depends="compile">	
 		<!--suite 1 begin -->
-		<property name="suite.web.Template1_RunAllTestNgTests" value="Template1_RunAllTestNgTests" />
-		<testng classpath="${test.classpath}:${test.dest}" suitename="Template1_RunAllTestNgTests" outputDir="test-output" >
-			<xmlfileset dir="." includes="webSuites/Template1_RunAllTestNgTests.xml" />			
+		<property name="suite.web.Suite1_RegressionLoginLogout" value="Suite1_RegressionLoginLogout" />
+		<testng classpath="${test.classpath}:${test.dest}" suitename="Suite1_RegressionLoginLogout" outputDir="test-output" >
+			<xmlfileset dir="." includes="suites/webSuites/Suite1_RegressionLoginLogout.xml" />			
 		</testng>
-	    <antcall target="testngReportCopyAndReportParser">
-	    	<param name="testngDir" value="${testng.report.dir}${suite.web.Template1_RunAllTestNgTests}"/>
+	    <antcall target="testngReportCopyAndReportParserAndEmailReport">
+	    	<param name="testngDir" value="${testng.report.dir}${suite.web.Suite1_RegressionLoginLogout}"/>
 		</antcall>	
 
 		<!--suite 2 begin -->
-		<property name="suite.web.Template2_RunSpecificTestngGroupsTest" value="Template2_RunSpecificTestngGroupsTest" />
-		<testng classpath="${test.classpath}:${test.dest}" suitename="Template2_RunSpecificTestngGroupsTest" outputDir="test-output" >
-			<xmlfileset dir="." includes="webSuites/Suite2_Template2_RunSpecificTestngGroupsTest.xml" />			
+		<property name="suite.web.Suite2_AnnotationInvalidLoginTests" value="Suite2_AnnotationInvalidLoginTests" />
+		<testng classpath="${test.classpath}:${test.dest}" suitename="Suite2_AnnotationInvalidLoginTests" outputDir="test-output" >
+			<xmlfileset dir="." includes="suites/webSuites/Suite2_AnnotationInvalidLoginTests.xml" />			
 		</testng>
-	    <antcall target="testngReportCopyAndReportParser">
-	    	<param name="testngDir" value="${testng.report.dir}${suite.web.Template2_RunSpecificTestngGroupsTest}"/>
-		</antcall>	
-		
+	    <antcall target="testngReportCopyAndReportParserAndEmailReport">
+	    	<param name="testngDir" value="${testng.report.dir}${suite.web.Suite2_AnnotationInvalidLoginTests}"/>
+		</antcall>			
 	</target>
 	
-	<target name="testngReportCopyAndReportParser">
-		<!-- Copy to TestNG report directory-->
+	<target name="testngReportCopyAndReportParserAndEmailReport">
+		<!-- to copy previous suite result from test-output to TestngReports directory -->  
 		<mkdir dir="${testngDir}">
 		</mkdir>
 		
-		<!-- to copy previous suite result to TestNG report directory -->  
 		<copy todir="${testngDir}">
 			<fileset dir="test-output"/>
 		</copy> <!-- end of Testng Report -->
 		
 		<!-- Execute ReportParseAndGoogleDocUpdate -->
-		<testng classpath="${test.classpath}:${test.dest}" suitename="ReportParseAndGoogleDocUpdate" outputDir="test-output-ReportParser" >
-			<xmlfileset dir="." includes="webSuites/ReportParseAndGoogleDocUpdate.xml" />			
-		</testng>		
+		<testng classpath="${test.classpath}:${test.dest}" suitename="ReportParseAndGoogleDocUpdate" outputDir="test-output-GoogleParserReport" >
+			<xmlfileset dir="." includes="suites/webSuites/ReportParseAndGoogleDocUpdate.xml" />			
+		</testng>
+		
+		<!-- Email current suite report from test-output dir -->
+		<testng classpath="${test.classpath}:${test.dest}" suitename="SuiteEmail" outputDir="test-output-EmailReport" >
+			<xmlfileset dir="." includes="suites/webSuites/SuiteEmail.xml" />			
+		</testng>         
 	</target>
 	
 	
@@ -148,31 +150,30 @@
 		<target name="runAsTestngXslt" depends="compile">
 			
 			<!--suite 1 begin -->
-			<property name="suite.web.Template1_RunAllTestNgTests" value="Template1_RunAllTestNgTests" />
-			<testng classpath="${test.classpath}:${test.dest}" suitename="Template1_RunAllTestNgTests" outputDir="test-output" >
-				<xmlfileset dir="." includes="webSuites/Template1_RunAllTestNgTests.xml" />			
+			<property name="suite.web.Suite1_RegressionLoginLogout" value="Suite1_RegressionLoginLogout" />
+			<testng classpath="${test.classpath}:${test.dest}" suitename="Suite1_RegressionLoginLogout" outputDir="test-output" >
+				<xmlfileset dir="." includes="suites/webSuites/Suite1_RegressionLoginLogout.xml" />			
 			</testng>
-		    <antcall target="testngXsltReportCopyAndReportParser">
-		    	<param name="testngXsltDir" value="${testngXslt.report.dir}${suite.web.Template1_RunAllTestNgTests}"/>
+		    <antcall target="testngXsltReportCopyAndReportParserAndEmailReport">
+		    	<param name="testngXsltDir" value="${testngXslt.report.dir}${suite.web.Suite1_RegressionLoginLogout}"/>
 			</antcall>	
 
 			<!--suite 2 begin -->
-			<property name="suite.web.Template2_RunSpecificTestngGroupsTest" value="Template2_RunSpecificTestngGroupsTest" />
-			<testng classpath="${test.classpath}:${test.dest}" suitename="Template2_RunSpecificTestngGroupsTest" outputDir="test-output" >
-				<xmlfileset dir="." includes="webSuites/Template2_RunSpecificTestngGroupsTest.xml" />			
+			<property name="suite.web.Suite2_AnnotationInvalidLoginTests" value="Suite2_AnnotationInvalidLoginTests" />
+			<testng classpath="${test.classpath}:${test.dest}" suitename="Suite2_AnnotationInvalidLoginTests" outputDir="test-output" >
+				<xmlfileset dir="." includes="suites/webSuites/Suite2_AnnotationInvalidLoginTests.xml" />			
 			</testng>
-		    <antcall target="testngXsltReportCopyAndReportParser">
-		    	<param name="testngXsltDir" value="${testngXslt.report.dir}${suite.web.Template2_RunSpecificTestngGroupsTest}"/>
+		    <antcall target="testngXsltReportCopyAndReportParserAndEmailReport">
+		    	<param name="testngXsltDir" value="${testngXslt.report.dir}${suite.web.Suite2_AnnotationInvalidLoginTests}"/>
 			</antcall>	
 			
 		</target>
 		
-		<target name="testngXsltReportCopyAndReportParser">
-			<!-- Copy to TestNG report directory-->
+		<target name="testngXsltReportCopyAndReportParserAndEmailReport">
+			<!-- to copy previous suite result from test-output to TestngXSLTReports directory -->  
 			<mkdir dir="${testngXsltDir}">
 			</mkdir>
 			
-	    	<!-- to copy previous suite result to TestngXslt report folder -->  
 	        <xslt in="${ws.home}/test-output/testng-results.xml" style="src/xslt/testng-results.xsl" 
 	        	out="${testngXsltDir}/index.html" classpathref="test.c" processor="SaxonLiaison">
 	        	
@@ -183,9 +184,14 @@
 	        </xslt>  <!-- end of TestngXslt Report -->
 			
 			<!-- Execute ReportParseAndGoogleDocUpdate -->
-			<testng classpath="${test.classpath}:${test.dest}" suitename="ReportParseAndGoogleDocUpdate" outputDir="test-output-ReportParser" >
-				<xmlfileset dir="." includes="webSuites/ReportParseAndGoogleDocUpdate.xml" />			
-			</testng>		
+			<testng classpath="${test.classpath}:${test.dest}" suitename="ReportParseAndGoogleDocUpdate" outputDir="test-output-GoogleParserReport" >
+				<xmlfileset dir="." includes="suites/webSuites/ReportParseAndGoogleDocUpdate.xml" />			
+			</testng>
+			
+			<!-- Email current suite report from test-output dir -->
+			<testng classpath="${test.classpath}:${test.dest}" suitename="SuiteEmail" outputDir="test-output-EmailReport" >
+				<xmlfileset dir="." includes="suites/webSuites/SuiteEmail.xml" />			
+			</testng>			
 		</target>
 	
 	
