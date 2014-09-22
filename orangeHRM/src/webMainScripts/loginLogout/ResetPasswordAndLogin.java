@@ -1,3 +1,12 @@
+/*
+ * Date: September 1st 2014
+ * Author: Yagnesh Shah   
+ * Twitter handle: @YagneshHShah
+ * Organization: Moolya Software Testing Pvt Ltd
+ * License Type: MIT
+*/
+
+
 //Aim: Reset password after logged-in
 
 package webMainScripts.loginLogout;
@@ -46,7 +55,7 @@ public class ResetPasswordAndLogin extends SelectBrowser
 	@Test(priority=1, groups={"loginlogout"})
 	public void resetPasswordCheck() throws IOException, BiffException, InterruptedException
 	{	String[] users={"admin"};
-		System.out.println("Checking for Reset password test...");
+		System.out.println("Checking for ResetPasswordAndLogin test...");
 		for(int i=0; i<users.length; i++)
 		{
 			//reset password to new value

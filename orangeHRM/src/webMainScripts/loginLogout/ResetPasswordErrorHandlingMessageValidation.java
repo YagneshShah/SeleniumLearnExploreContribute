@@ -1,4 +1,14 @@
 /*
+ * Date: September 1st 2014
+ * Author: Yagnesh Shah   
+ * Twitter handle: @YagneshHShah
+ * Organization: Moolya Software Testing Pvt Ltd
+ * License Type: MIT
+*/
+
+
+
+/*
  * Aim: Reset password and error handling message validation
  * Note: This test is not valid as in this website, error messages are like toast messages(i.e, doesn't stay visible to long).
  * So, refer this test as template for some other website...
@@ -49,7 +59,7 @@ public class ResetPasswordErrorHandlingMessageValidation extends SelectBrowser
 	@Test(priority=1, groups={"loginlogout"})
 	public void resetPasswordAndErrorHandlingMessagesCheck() throws IOException, BiffException, InterruptedException
 	{	String[] users={"admin"};
-		System.out.println("Checking for resetPasswordAndErrorHandlingMessagesTest...");
+		System.out.println("Checking for ResetPasswordErrorHandlingMessageValidation test...");
 		for(int i=0; i<users.length; i++)
 		{
 			LoginLogoutMethods.login(users[i]);

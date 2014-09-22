@@ -8,7 +8,7 @@
     </target>
 	
 	<target name="run">
-	    <ant antfile="masterBuildFiles/build2_WebRegression.xml" target="runAsTestngXslt" />
+	    <ant antfile="masterBuildFiles/build2_WebRegression.xml" target="run" />
 		<!-- keep calling antfile for any number of child build.xml as you wish as follows: 
 	    <ant antfile="masterBuildFiles/build1_WebSanity.xml" target="run" /> 
 	    -->

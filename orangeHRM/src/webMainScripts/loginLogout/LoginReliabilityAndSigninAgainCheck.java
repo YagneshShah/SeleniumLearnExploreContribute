@@ -1,4 +1,13 @@
 /*
+ * Date: September 1st 2014
+ * Author: Yagnesh Shah   
+ * Twitter handle: @YagneshHShah
+ * Organization: Moolya Software Testing Pvt Ltd
+ * License Type: MIT
+*/
+
+
+/*
 Aim: Tests for Log-in/Log-out features. Following tests are covered in this script:
 	assertLoginElements
 	maskedPassword
@@ -57,7 +66,7 @@ public class LoginReliabilityAndSigninAgainCheck extends SelectBrowser
 	@Test(priority=1, groups={"loginlogout"})
 	public void loginReliabilityAndSigninAgain() throws BiffException, IOException, InterruptedException
 	{	
-		System.out.println("Checking for loginReliability&SigninAgain test...");
+		System.out.println("Checking for LoginReliabilityAndSigninAgainCheck test...");
 		LoginLogoutMethods.loginReliabilityAndSigninAgain("validLogin","#LoginReliabilityAndSigninAgainCheck");
 	}
 

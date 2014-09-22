@@ -1,4 +1,13 @@
 /*
+ * Date: September 1st 2014
+ * Author: Yagnesh Shah   
+ * Twitter handle: @YagneshHShah
+ * Organization: Moolya Software Testing Pvt Ltd
+ * License Type: MIT
+*/
+
+
+/*
 Aim: Tests for Log-in/Log-out features. Following tests are covered in this script:
 	assertLoginElements
 	maskedPassword
@@ -59,7 +68,7 @@ public class PasswordMaskedAndAssertAllElements extends SelectBrowser
 	@Test(priority=1, groups={"loginlogout"})
 	public void passwordMaskAndAssertAllElement() throws IOException, BiffException, InterruptedException
 	{	
-		System.out.println("Checking for passwordMaskAndAssertAllElement test...");
+		System.out.println("Checking for PasswordMaskedAndAssertAllElements test...");
 		LoginLogoutMethods.passwordMasked();
 		
 		LoginLogoutMethods.login("admin"); //indirectly indicates that username/password/signin buttons are present

@@ -1,3 +1,11 @@
+#
+# Date: September 1st 2014
+# Author: Yagnesh Shah   
+# Twitter handle: @YagneshHShah
+# Organization: Moolya Software Testing Pvt Ltd
+# License Type: MIT
+#
+
 
 #Approach 1 - To execute test suites using TestNg commands from terminal (Note: without build.xml)
 #Disadvantage - TestNg report for each test suite will be replaced under test-output directory
@@ -9,6 +17,8 @@ cd /c/Users/Yash/git/SeleniumLearnExploreContribute/orangeHRM/suites/webSuites
 
 java -cp /c/Users/Yash/Downloads/Automation/jars/new/allJars/*:/c/Users/Yash/git/SeleniumLearnExploreContribute/orangeHRM/bin org.testng.TestNG Suite1_RegressionLoginLogout.xml
 java -cp /c/Users/Yash/Downloads/Automation/jars/new/allJars/*:/c/Users/Yash/git/SeleniumLearnExploreContribute/orangeHRM/bin org.testng.TestNG ReportParseAndGoogleDocUpdate.xml
+java -cp /c/Users/Yash/Downloads/Automation/jars/new/allJars/*:/c/Users/Yash/git/SeleniumLearnExploreContribute/orangeHRM/bin org.testng.TestNG SuiteEmail.xml
 
 java -cp /c/Users/Yash/Downloads/Automation/jars/new/allJars/*:/c/Users/Yash/git/SeleniumLearnExploreContribute/orangeHRM/bin org.testng.TestNG Suite2_AnnotationInvalidLoginTests.xml
 java -cp /c/Users/Yash/Downloads/Automation/jars/new/allJars/*:/c/Users/Yash/git/SeleniumLearnExploreContribute/orangeHRM/bin org.testng.TestNG ReportParseAndGoogleDocUpdate.xml
+java -cp /c/Users/Yash/Downloads/Automation/jars/new/allJars/*:/c/Users/Yash/git/SeleniumLearnExploreContribute/orangeHRM/bin org.testng.TestNG SuiteEmail.xml

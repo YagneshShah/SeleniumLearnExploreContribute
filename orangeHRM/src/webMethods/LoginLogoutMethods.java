@@ -1,4 +1,13 @@
 /*
+ * Date: September 1st 2014
+ * Author: Yagnesh Shah   
+ * Twitter handle: @YagneshHShah
+ * Organization: Moolya Software Testing Pvt Ltd
+ * License Type: MIT
+*/
+
+
+/*
 Aim: Methods for Log-in/Log-out tests:
 	validlLogin
 	loginReliability&SigninAgain

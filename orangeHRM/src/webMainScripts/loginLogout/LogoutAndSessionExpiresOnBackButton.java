@@ -1,3 +1,11 @@
+/*
+ * Date: September 1st 2014
+ * Author: Yagnesh Shah   
+ * Twitter handle: @YagneshHShah
+ * Organization: Moolya Software Testing Pvt Ltd
+ * License Type: MIT
+*/
+
 
 package webMainScripts.loginLogout;
 
@@ -45,7 +53,7 @@ public class LogoutAndSessionExpiresOnBackButton extends SelectBrowser
 	  	WebCommonMethods.openURL();
 	  	
 	  	
-		System.out.println("Checking for LogoutAndSessionExpiresOnBackButtonClick test...");
+		System.out.println("Checking for LogoutAndSessionExpiresOnBackButton test...");
 		LoginLogoutMethods.login("admin");
 		Thread.sleep(4000);
 		LoginLogoutMethods.logout();

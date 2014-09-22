@@ -13,12 +13,14 @@
 
 test-output/*
 test-output
+test-output-EmailReport/*
+test-output-EmailReport
+test-output-GoogleParserReport/*
+test-output-GoogleParserReport
 testngReports/*
 testngReports
 testngXsltReports/*
 testngXsltReports
-test-output-ReportParser/*
-test-output-ReportParser
 failure_screenshots/*
 failure_screenshots
 
@@ -27,6 +29,7 @@ failure_screenshots
 *.pydevproject
 .metadata
 bin/**
+build
 build/*
 tmp/**
 tmp/**/*

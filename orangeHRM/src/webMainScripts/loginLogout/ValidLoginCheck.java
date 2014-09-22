@@ -1,4 +1,13 @@
 /*
+ * Date: September 1st 2014
+ * Author: Yagnesh Shah   
+ * Twitter handle: @YagneshHShah
+ * Organization: Moolya Software Testing Pvt Ltd
+ * License Type: MIT
+*/
+
+
+/*
 Aim: Tests for Log-in/Log-out features. Following tests are covered in this script:
 	assertLoginElements
 	maskedPassword
@@ -59,7 +68,7 @@ public class ValidLoginCheck extends SelectBrowser
 	@Test(priority=1, groups={"loginlogout"})
 	public void validLogin() throws IOException, BiffException, InterruptedException
 	{	
-		System.out.println("Checking for validLogin test...");
+		System.out.println("Checking for ValidLoginCheck test...");
 		LoginLogoutMethods.login("admin");
 		LoginLogoutMethods.logout();
 	}

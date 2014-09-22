@@ -47,7 +47,7 @@ public class ReportParseGoogleUpdate {
 	public static void ReportParsingGoogleDocUpdate() throws IOException, ServiceException {
 		System.out.println("Script to parse test report and update google doc with results");
 		//Auth to access google doc
-		spreadSheetDemo = new ReportParseGoogleUpdate("seleniumtester12@gmail.com", "testaccount12"); //gmail account via which doc will be accessed for updating test results
+		spreadSheetDemo = new ReportParseGoogleUpdate("abc@gmail.com", "abc"); //gmail account via which doc will be accessed for updating test results
 
 		spreadsheet = spreadSheetDemo.getSpreadSheet(0);//give index to select the spreadsheet from the folder
 
