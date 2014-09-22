@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="Check Email Notification">
+  
+ <test name="Check Email Notification">
+    <classes>
+      <class name="utils.SmsEmailNotification"/>
+    </classes>
+  </test> <!-- Test1 -->
+
+  </suite> 

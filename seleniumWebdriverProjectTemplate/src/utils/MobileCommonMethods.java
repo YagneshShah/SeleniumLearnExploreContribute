@@ -23,7 +23,7 @@ import jxl.Sheet;
 import jxl.Workbook;
 import jxl.read.biff.BiffException;
 import utils.WebCommonMethods;
-import mobilePageObjects.SigninElements; //Update this as per your context
+//import mobilePageObjects.SigninElements; //Update this as per your context
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -241,10 +241,11 @@ public class MobileCommonMethods
 		// Text with signin button :: Sign in
 		Cell[] record = MobileCommonMethods.mobileReadExcel("validLogin",username); // read from excel
 		String mobileNumber = record[1].getContents();
-		driver.findElementByName(SigninElements.textField_projectNameSignIn).sendKeys(mobileNumber);
-		driver.findElementByName(SigninElements.button_textField_projectNameSignIn).click();
-		MobileCommonMethods.mPinEntry(username); // method to enter the mpin
-		driver.findElementByName(SigninElements.button_TermsOfServiceAccept).click();//No content desc for this button
+//update below comments based on your app context & then you may use this method		
+//		driver.findElementByName(SigninElements.textField_projectNameSignIn).sendKeys(mobileNumber);
+//		driver.findElementByName(SigninElements.button_textField_projectNameSignIn).click();
+//		MobileCommonMethods.mPinEntry(username); // method to enter the mpin
+//		driver.findElementByName(SigninElements.button_TermsOfServiceAccept).click();//No content desc for this button
 		driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 	}
 

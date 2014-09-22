@@ -9,24 +9,27 @@
 *target*
 *.ear
 
-build
-build/*
+
+
 test-output/*
 test-output
-testngReports
+test-output-EmailReport/*
+test-output-EmailReport
+test-output-GoogleParserReport/*
+test-output-GoogleParserReport
 testngReports/*
-testngXsltReports
+testngReports
 testngXsltReports/*
-test-output-ReportParser
-test-output-ReportParser/*
-failure_screenshots
+testngXsltReports
 failure_screenshots/*
+failure_screenshots
 
 # eclipse specific git ignore
 #############################
 *.pydevproject
 .metadata
 bin/**
+build
 build/*
 tmp/**
 tmp/**/*
