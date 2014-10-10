@@ -227,9 +227,9 @@
     
 	<target name="sendMail" depends="RunAndViewReport">
 	        <zip destfile="${testngXslt.report.dir}/Report.zip" basedir="${testngXslt.report.dir}"/>
-	        <mail mailhost="smtp.gmail.com" mailport="465" subject="Notification of TESTNG build result" ssl="false" user="automationmoolya@gmail.com" password="moolya@universe">
-	            <from address="automationmoolya@gmail.com"/>
-	            <to address="yagnesh@moolya.com"/>
+	        <mail mailhost="smtp.gmail.com" mailport="465" subject="Notification of TESTNG build result" ssl="false" user="abc@gmail.com" password="abc">
+	            <from address="abc@gmail.com"/>
+	            <to address="xyz@gmail.com"/>
 	            <message>The build has finished. A details report of this build is attached</message>
 	            <attachments>
 	                <fileset dir="testngXslt.report.dir">
