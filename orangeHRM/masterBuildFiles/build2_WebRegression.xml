@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- 
  * Date: September 1st 2014
+ * Last updated: Oct 30th 2014
  * Author: Yagnesh Shah   
  * Twitter handle: @YagneshHShah
  * Organization: Moolya Software Testing Pvt Ltd
@@ -10,8 +11,11 @@
 <project name="projectName" default="clean" basedir="./../../"> <!-- 2 directories back from child build.xml's current directory which is pointing to root directory -->
 	
 	<!-- ========== Initialize Properties =================================== -->
+	<!-- Include your properties in your build script -->
+	<property file="config.properties" prefix="configfile"/>
+	
     <property name="ws.home" value="${basedir}" />
-	<property name="ws.jars" value="/Users/Yash/Downloads/Automation/jars/new/allJars" />
+	<property name="ws.jars" value="${configfile.allJarsPath}" />
 	<property name="test.dest" value="${ws.home}/build"/>
     <property name="test.src" value="${ws.home}/src"/>
 	<property name="ng.result" value="test-output"/>
@@ -53,8 +57,14 @@
     		<os family="mac" />
     	</condition>
     	
-    	<taskdef name="testng" classpath="/Users/Yash/Downloads/Automation/jars/new/allJars/testng-6.8.5.jar" classname="org.testng.TestNGAntTask" /> 
+	    <!-- Copy ant-contrib-0.3.jar to the lib directory of your Ant installation. If you want to use one of the tasks in your own project, add the lines
+    	<taskdef resource="net/sf/antcontrib/antcontrib.properties"/> 
+    	to your build file.
+    	website reference :: http://ant-contrib.sourceforge.net/
+    	-->
+    	<taskdef resource="net/sf/antcontrib/antcontrib.properties"/>
     	
+    	<taskdef name="testng" classpath="${configfile.testngJarPath}" classname="org.testng.TestNGAntTask" />    	
     	<!--    	
     	<!- use direct path for classpath if you don't prefer to use 'lib' directory:    classpath="/Users/yash/Documents/Jar Files/testng-6.8.jar"   ->
     	<taskdef name="testng" classname="org.testng.TestNGAntTask">
