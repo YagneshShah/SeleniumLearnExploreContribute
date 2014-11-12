@@ -106,6 +106,11 @@ public class LoginLogoutMethods  extends SelectBrowser {
 	//error handling messages
 	@FindBy(id="UserHeading")
 		public static WebElement resetPasswordSaveResponseAlert;
+	@FindBy(xpath=".//*[@id='frmChangePassword']/fieldset/ol/li[4]/span")
+		public static WebElement confirmPasswordMismatch;
+	@FindBy(xpath=".//*[@id='systemUser']/div[2]/div") //no id since it's a toast message
+		public static WebElement currentPasswordIsWrong;
+	
 	
 //	public static void callingImplicitSleep()
 //    {
@@ -186,10 +191,11 @@ public class LoginLogoutMethods  extends SelectBrowser {
     }
 	
 	//logout definition is currently using xPath until id are provided
-	public static void logout() throws IOException, BiffException
+	public static void logout() throws IOException, BiffException, InterruptedException
 	{
 		profileDropdown.click();
 		WebCommonMethods.callingImplicitSleep();
+		Thread.sleep(3000);
     	logoutButton.click();
     	WebCommonMethods.callingImplicitSleep();
     	
@@ -280,10 +286,12 @@ public class LoginLogoutMethods  extends SelectBrowser {
 	
 	public static void resetPasswordToNewValueAndLogin(String uniqueValueUserName) throws BiffException, IOException, InterruptedException
 	{
+		System.out.println("resetPasswordToNewValueAndLogin process initiated...");
 		Cell[] userNameRecord = WebCommonMethods.webReadExcel("validLogin", uniqueValueUserName);
 		
 		profileDropdown.click();
 		WebCommonMethods.callingImplicitSleep();
+		Thread.sleep(3000);
 		resetPasswordOption.click();
 		WebCommonMethods.callingImplicitSleep();
     	resetPasswordEditModeButton.click();
@@ -306,14 +314,16 @@ public class LoginLogoutMethods  extends SelectBrowser {
 		//Thread.sleep(7000);
 		WebCommonMethods.callingImplicitSleep();
 		validLogin(uniqueValueUserName,userNameRecord[2].getContents(),userNameRecord[3].getContents());
+		System.out.println("resetPasswordToNewValueAndLogin success...");
 	}
 	
 	public static void resetPasswordToOldValueAndLogin(String uniqueValueUserName) throws BiffException, IOException, InterruptedException
 	{
+		System.out.println("resetPasswordToOldValueAndLogin process initiated...");
 		Cell[] userNameRecord = WebCommonMethods.webReadExcel("validLogin", uniqueValueUserName);
-		
 		profileDropdown.click();
 		WebCommonMethods.callingImplicitSleep();
+		Thread.sleep(3000);
 		resetPasswordOption.click();
     	WebCommonMethods.callingImplicitSleep();
     	resetPasswordEditModeButton.click();
@@ -335,6 +345,8 @@ public class LoginLogoutMethods  extends SelectBrowser {
     	LoginLogoutMethods.logout();
 		WebCommonMethods.callingImplicitSleep();
 		validLogin(uniqueValueUserName,userNameRecord[1].getContents(),userNameRecord[3].getContents());
+		LoginLogoutMethods.logout();
+		System.out.println("resetPasswordToOldValueAndLogin success...");
 	}
 	
 	public static void resetPasswordAndLoginWithOldPassword(String uniqueValueUserName) throws BiffException, IOException, InterruptedException
@@ -343,6 +355,7 @@ public class LoginLogoutMethods  extends SelectBrowser {
 		
 		profileDropdown.click();
 		WebCommonMethods.callingImplicitSleep();
+		Thread.sleep(3000);
 		resetPasswordOption.click();
     	WebCommonMethods.callingImplicitSleep();
     	resetPasswordEditModeButton.click();
@@ -374,18 +387,21 @@ public class LoginLogoutMethods  extends SelectBrowser {
 		
 		profileDropdown.click();
 		WebCommonMethods.callingImplicitSleep();
+		Thread.sleep(3000);
 		resetPasswordOption.click();
 		WebCommonMethods.callingImplicitSleep();
+    	resetPasswordEditModeButton.click();
+    	WebCommonMethods.callingImplicitSleep();
 		
 		//resetPassword.newAndConfirmPasswordMismatch
 		oldPasswordField.sendKeys(userNameRecord[1].getContents());
     	newPasswordField.sendKeys(userNameRecord[2].getContents());
-    	confirmPasswordField.sendKeys(userNameRecord[1].getContents());
+    	confirmPasswordField.sendKeys(userNameRecord[1].getContents());//doing so will give new password & confirm new password mismatch
     	resetPasswordSaveButton.click();
 		WebCommonMethods.callingImplicitSleep();
 		Thread.sleep(5000);
 		Cell[] NewAndConfirmPasswordMismatchMessage = WebCommonMethods.webReadExcel("errorHandlingMessages", "resetPassword.newAndConfirmPasswordMismatch");
-		Assert.assertEquals(resetPasswordSaveResponseAlert.getText(),NewAndConfirmPasswordMismatchMessage[1].getContents());
+		Assert.assertEquals(confirmPasswordMismatch.getText(),NewAndConfirmPasswordMismatchMessage[1].getContents());
     	
 		//clear all fields
 		oldPasswordField.clear();
@@ -396,11 +412,11 @@ public class LoginLogoutMethods  extends SelectBrowser {
 		oldPasswordField.sendKeys("qwerty");
 		newPasswordField.sendKeys(userNameRecord[1].getContents());
 		confirmPasswordField.sendKeys(userNameRecord[1].getContents());
+		Cell[] invalidOldPasswordMessage = WebCommonMethods.webReadExcel("errorHandlingMessages", "resetPassword.invalidOldPassword"); // writing here to save time and avoid disappearing toast message
 		resetPasswordSaveButton.click();
 		WebCommonMethods.callingImplicitSleep();
-		Thread.sleep(5000);
-		Cell[] invalidOldPasswordMessage = WebCommonMethods.webReadExcel("errorHandlingMessages", "resetPassword.invalidOldPassword");
-		Assert.assertEquals(resetPasswordSaveResponseAlert.getText(),invalidOldPasswordMessage[1].getContents());
+		Thread.sleep(1000);
+		Assert.assertEquals(currentPasswordIsWrong.getText(),invalidOldPasswordMessage[1].getContents());
 	}
 	
 

@@ -62,8 +62,8 @@ public class ResetPasswordAndLogin extends SelectBrowser
 			LoginLogoutMethods.login(users[i]);
 			LoginLogoutMethods.resetPasswordToNewValueAndLogin(users[i]);
 			LoginLogoutMethods.resetPasswordToOldValueAndLogin(users[i]);
-			Thread.sleep(7000);
-			//LoginLogoutMethods.logout();
+			Thread.sleep(5000);
+			LoginLogoutMethods.logout();
 		}
 	}
 
