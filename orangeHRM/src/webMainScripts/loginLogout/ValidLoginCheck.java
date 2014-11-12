@@ -66,11 +66,12 @@ public class ValidLoginCheck extends SelectBrowser
 
 	//validLogin test 
 	@Test(priority=1, groups={"loginlogout"})
-	public void validLogin() throws IOException, BiffException, InterruptedException
+	public void validLoginCheck() throws IOException, BiffException, InterruptedException
 	{	
-		System.out.println("Checking for ValidLoginCheck test...");
+		System.out.println("--------------------ValidLoginCheck started----------------------");
 		LoginLogoutMethods.login("admin");
 		LoginLogoutMethods.logout();
+		System.out.println("--------------------ValidLoginCheck success----------------------");
 	}
 
 	

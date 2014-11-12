@@ -64,10 +64,11 @@ public class LoginReliabilityAndSigninAgainCheck extends SelectBrowser
 
 	// loginReliability&SigninAgain test :: data-driven, no overhead of list
 	@Test(priority=1, groups={"loginlogout"})
-	public void loginReliabilityAndSigninAgain() throws BiffException, IOException, InterruptedException
+	public void loginReliabilityAndSigninAgainCheck() throws BiffException, IOException, InterruptedException
 	{	
-		System.out.println("Checking for LoginReliabilityAndSigninAgainCheck test...");
+		System.out.println("---------------LoginReliabilityAndSigninAgainCheck started-----------------");
 		LoginLogoutMethods.loginReliabilityAndSigninAgain("validLogin","#LoginReliabilityAndSigninAgainCheck");
+		System.out.println("---------------LoginReliabilityAndSigninAgainCheck success-----------------");
 	}
 
 	

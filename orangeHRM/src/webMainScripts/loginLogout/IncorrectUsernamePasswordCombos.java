@@ -64,11 +64,12 @@ public class IncorrectUsernamePasswordCombos extends SelectBrowser
     } 
 
 	@Test(priority=1, groups={"loginlogout","invalidlogin"})
-	public void wrongUsernamePasswordCombos() throws BiffException, IOException, InterruptedException
+	public void IncorrectUsernamePasswordCombosCheck() throws BiffException, IOException, InterruptedException
 	{	
-		System.out.println("Checking for IncorrectUsernamePasswordCombos test...");
+		System.out.println("----------------IncorrectUsernamePasswordCombos check started----------------");
 		LoginLogoutMethods.IncorrectUsernamePasswordCombos("invalidLogin","#IncorrectUsernamePasswordCombos");
 		Thread.sleep(3000);
+		System.out.println("----------------IncorrectUsernamePasswordCombos test success----------------");
 	}
 	
 	@AfterMethod(alwaysRun=true)

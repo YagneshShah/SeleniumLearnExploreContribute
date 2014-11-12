@@ -46,14 +46,14 @@ public class LogoutAndSessionExpiresOnBackButton extends SelectBrowser
 	@Test(priority=1, groups={"loginlogout"})
 	public void LogoutAndSessionExpiresOnBackButtonClick() throws BiffException, IOException, InterruptedException
 	{	
+		System.out.println("----------------LogoutAndSessionExpiresOnBackButtonClick check started----------------");
+
 		WebDriver d = getBrowser();
 	    loginLogout = PageFactory.initElements(d, LoginLogoutMethods.class);
 	    general = PageFactory.initElements(d, WebCommonMethods.class);// initiating the driver and the .class file (the pageObject script)	    
 	    
-	  	WebCommonMethods.openURL();
+	  	WebCommonMethods.openURL(); 	
 	  	
-	  	
-		System.out.println("Checking for LogoutAndSessionExpiresOnBackButton test...");
 		LoginLogoutMethods.login("admin");
 		Thread.sleep(4000);
 		LoginLogoutMethods.logout();
@@ -65,6 +65,7 @@ public class LogoutAndSessionExpiresOnBackButton extends SelectBrowser
 		
 		Cell[] loginPageLabels = WebCommonMethods.readExcelNextRowOfUniqueValue("webTabsWithSubheading", "#loginPage");
 		Assert.assertEquals(LoginLogoutMethods.loginPanelHeadingLabel.getText(), loginPageLabels[1].getContents());
+		System.out.println("----------------LogoutAndSessionExpiresOnBackButtonClick check success----------------");
 	}
 
 	

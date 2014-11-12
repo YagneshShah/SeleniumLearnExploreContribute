@@ -58,14 +58,17 @@ public class ResetPasswordErrorHandlingMessageValidation extends SelectBrowser
 	//validLogin test 
 	@Test(priority=1, groups={"loginlogout"})
 	public void resetPasswordAndErrorHandlingMessagesCheck() throws IOException, BiffException, InterruptedException
-	{	String[] users={"admin"};
-		System.out.println("Checking for ResetPasswordErrorHandlingMessageValidation test...");
+	{	
+		System.out.println("------------------resetPasswordAndErrorHandlingMessagesCheck started--------------------");
+		String[] users={"admin"};
+
 		for(int i=0; i<users.length; i++)
 		{
 			LoginLogoutMethods.login(users[i]);
 			LoginLogoutMethods.resetPasswordErrorHandlingMessageValidation(users[i]);
 			LoginLogoutMethods.logout();
 		}
+		System.out.println("------------------resetPasswordAndErrorHandlingMessagesCheck success--------------------");
 	}
 
 	

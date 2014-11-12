@@ -53,9 +53,10 @@ public class ResetPasswordAndLoginWithOldPassword extends SelectBrowser
 
 	//validLogin test 
 	@Test(priority=1, groups={"loginlogout"})
-	public void resetPasswordCheck() throws IOException, BiffException, InterruptedException
-	{	String[] users={"admin"};
-		System.out.println("Checking for ResetPasswordAndLoginWithOldPassword test...");
+	public void ResetPasswordAndLoginWithOldPasswordCheck() throws IOException, BiffException, InterruptedException
+	{	
+		String[] users={"admin"};
+		System.out.println("-----------------ResetPasswordAndLoginWithOldPasswordCheck started-----------------");
 		for(int i=0; i<users.length; i++)
 		{
 			//reset password to new value
@@ -79,6 +80,7 @@ public class ResetPasswordAndLoginWithOldPassword extends SelectBrowser
 			//Thread.sleep(7000);
 			//LoginLogoutMethods.logout();
 		}
+		System.out.println("-----------------ResetPasswordAndLoginWithOldPasswordCheck success-----------------");
 	}
 
 	

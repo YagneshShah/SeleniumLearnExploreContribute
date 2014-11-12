@@ -68,12 +68,13 @@ public class PasswordMaskedAndAssertAllElements extends SelectBrowser
 	@Test(priority=1, groups={"loginlogout"})
 	public void passwordMaskAndAssertAllElement() throws IOException, BiffException, InterruptedException
 	{	
-		System.out.println("Checking for PasswordMaskedAndAssertAllElements test...");
+		System.out.println("---------------passwordMaskAndAssertAllElement check started----------------");
 		LoginLogoutMethods.passwordMasked();
 		
 		LoginLogoutMethods.login("admin"); //indirectly indicates that username/password/signin buttons are present
 		LoginLogoutMethods.logout();
 		Thread.sleep(2000);
+		System.out.println("---------------passwordMaskAndAssertAllElement check success----------------");
 	}
 
 	

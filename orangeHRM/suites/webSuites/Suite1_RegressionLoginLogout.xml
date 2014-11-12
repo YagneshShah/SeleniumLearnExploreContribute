@@ -44,13 +44,12 @@
 		</classes>
 	</test> <!-- Test6 -->
 
-	<!--
 	<test name="ResetPasswordErrorHandlingMessageValidation">
 		<classes>
 			<class
 				name="webMainScripts.loginLogout.ResetPasswordErrorHandlingMessageValidation" />
 		</classes>
-	</test>  Test7 -->
+	</test> <!-- Test7 -->
 
 	<test name="ValidLoginCheck">
 		<classes>
