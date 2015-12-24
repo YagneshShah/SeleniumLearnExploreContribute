@@ -36,7 +36,7 @@ import utils.WebCommonMethods;
 import utils.SelectBrowser;
 import webMethods.jsonApiExamples;
 
-public class ExtractJsonApiEx1_GetRequest_HttpBinOrgSite extends SelectBrowser {
+public class CopyOfExtractJsonApiEx1_GetRequest_HttpBinOrgSite extends SelectBrowser {
 
 	jsonApiExamples jsonApiExample;
 	WebCommonMethods wcm;
@@ -48,9 +48,8 @@ public class ExtractJsonApiEx1_GetRequest_HttpBinOrgSite extends SelectBrowser {
     	WebDriver d = getBrowser();
 	  	//WebCommonMethods.openURL();
 
-    	jsonApiExample = PageFactory.initElements(d, jsonApiExamples.class);// initiating the driver and the .class file (the pageObject script)
+    	jsonApiExample = PageFactory.initElements(d, jsonApiExamples.class);// initiating the driver and the .class file (the pageObject script)	    
     	wcm = PageFactory.initElements(d, WebCommonMethods.class);
-
     } 
     
 	@Test(groups="jsonApiExamples")

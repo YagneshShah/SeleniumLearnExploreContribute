@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+ * Date: September 1st 2014
+ * Author: Yagnesh Shah   
+ * Twitter handle: @YagneshHShah
+ * Organization: Moolya Software Testing Pvt Ltd
+ * License Type: MIT
+-->
+
+<project name="projectName" default="clean" basedir="./../../"> <!-- 2 directories back from child build.xml's current directory which is pointing to root directory -->
+	
+	<!-- ========== Initialize Properties =================================== -->
+	<!-- Include your properties in your build script -->
+	<property file="config.properties" prefix="configfile"/>
+	
+    <property name="ws.home" value="${basedir}" />
+	<property name="ws.jars" value="${configfile.allJarsPath}" />
+	<property name="test.dest" value="${ws.home}/build"/>
+    <property name="test.src" value="${ws.home}/src"/>
+	<property name="ng.result" value="test-output"/>
+	
+	<echo> value of base dir = ${basedir} </echo>
+	
+	<!-- properties for copying the results -->
+	 <tstamp>
+		<format property="year" pattern="yyyy" />
+		<format property="DSTAMP" pattern="yyyy-MM-dd" />
+		<format property="TSTAMP" pattern="HH:mm:ss" />
+		<format property="dateversion" pattern="yyyy.MM.dd.HH:mm:ss" />
+		<format property="time.stamp" pattern="yyyy-MM-dd_HH-mm-ss aa_"/>
+	</tstamp>
+	
+	<property name="testng.report.dir" value="${ws.home}/testngReports/${time.stamp}"/>
+	<property name="testngXslt.report.dir" value="${ws.home}/testngXsltReports/${time.stamp}"/>
+	
+	<!-- ====== For setting the classpath ====  -->
+    <target name="setClassPath" unless="test.classpath">
+        <path id="classpath_jars">
+            <fileset dir="${ws.jars}" includes = "*.jar"/>
+        </path>
+        <pathconvert pathsep=":" 
+        	property="test.classpath" 
+        	refid="classpath_jars" />
+    	
+    </target>
+    
+	<!-- ============ Initializing other stuff ===========  -->
+    <target name="init" depends="setClassPath">
+        <tstamp>
+            <format property="start.time" pattern="MM-dd-yyyy (HH-mm-ss)"/>
+        </tstamp>
+    	<condition property="ANT"
+    		value="$(env.ANT_HOME)/bin/ant.bat"
+    		else="$(env.ANT_HOME)/bin/ant">
+    		<!-- os family="windows" /-->
+    		<os family="mac" />
+    	</condition>
+    	
+	    <!-- Copy ant-contrib-0.3.jar to the lib directory of your Ant installation. If you want to use one of the tasks in your own project, add the lines
+    	<taskdef resource="net/sf/antcontrib/antcontrib.properties"/> 
+    	to your build file.
+    	website reference :: http://ant-contrib.sourceforge.net/
+    	-->
+    	<taskdef resource="net/sf/antcontrib/antcontrib.properties"/>
+    	
+    	<taskdef name="testng" classpath="${configfile.testngJarPath}" classname="org.testng.TestNGAntTask" />     	
+    	<!--    	
+    	<!- use direct path for classpath if you don't prefer to use 'lib' directory:    classpath="/Users/yash/Documents/Jar Files/testng-6.8.jar"   ->
+    	<taskdef name="testng" classname="org.testng.TestNGAntTask">
+    		<classpath>
+    	    	<pathelement location="./lib/testng.jar"/>
+    	    </classpath>
+    	</taskdef>
+    	-->
+    	
+    </target>
+	
+	<target name="all">
+	</target>
+    
+	<!-- cleaning the destination folders -->
+	<target name="clean">
+        <echo message="deleting existing build directory"/>
+        <delete dir="${test.dest}"/>
+    </target>
+	
+	<!-- target for compiling the java files -->
+    <target name="compile" depends="init, clean">
+    	<delete includeemptydirs="true" quiet="true">
+    		<fileset dir="${test.dest}" includes="**/*"/>
+    	</delete>
+    	<echo message="making directory....."/>
+    	<mkdir dir="${test.dest}"/>
+    	<echo message="classpath-------: ${test.classpath}"/>
+    	<echo message="compiling....."/>
+        <javac 
+        	debug="true"
+        	destdir="${test.dest}"
+        	srcdir="${test.src}"
+        	classpath="${test.classpath}"
+        	includeantruntime="true"/>
+    </target>
+	
+	<!-- build -->
+	<target name="build" depends="init">	
+	</target>
+    
+
+	
+	
+	
+	
+	<!--  ========== Test executions & Generating reports using Testng utility for multiple suites ==============    -->
+	<!-- run -->
+	<target name="run" depends="compile">	
+		<!--suite 1 begin -->
+		<property name="sampleSuite" value="sampleSuite" />
+		<testng classpath="${test.classpath}:${test.dest}" suitename="sampleSuite" outputDir="test-output" >
+			<xmlfileset dir="." includes="suites/webSuites/sampleSuite.xml" />			
+		</testng>
+	    <antcall target="testngReportCopyAndReportParserAndEmailReport">
+	    	<param name="testngDir" value="${testng.report.dir}${sampleSuite}"/>
+		</antcall>	
+
+			
+	</target>
+	
+	<target name="testngReportCopyAndReportParserAndEmailReport">
+		<!-- to copy previous suite result from test-output to TestngReports directory -->  
+		<mkdir dir="${testngDir}">
+		</mkdir>
+		
+		<copy todir="${testngDir}">
+			<fileset dir="test-output"/>
+		</copy> <!-- end of Testng Report -->
+		
+		<!-- Execute ReportParseAndGoogleDocUpdate -->
+		<testng classpath="${test.classpath}:${test.dest}" suitename="ReportParseAndGoogleDocUpdate" outputDir="test-output-GoogleParserReport" >
+			<xmlfileset dir="." includes="suites/webSuites/ReportParseAndGoogleDocUpdate.xml" />			
+		</testng>
+		
+		<!-- Email current suite report from test-output dir -->
+		<testng classpath="${test.classpath}:${test.dest}" suitename="SuiteEmail" outputDir="test-output-EmailReport" >
+			<xmlfileset dir="." includes="suites/webSuites/SuiteEmail.xml" />			
+		</testng>         
+	</target>
+	
+	
+	
+	<!--  ========== Test executions & Generating reports using XSLT utility for multiple suites ==============    -->
+	<!-- run -->
+		<target name="runAsTestngXslt" depends="compile">
+			
+			<!--suite 1 begin -->
+			<property name="suite.web.Suite1_RegressionLoginLogout" value="Suite1_RegressionLoginLogout" />
+			<testng classpath="${test.classpath}:${test.dest}" suitename="Suite1_RegressionLoginLogout" outputDir="test-output" >
+				<xmlfileset dir="." includes="suites/webSuites/Suite1_RegressionLoginLogout.xml" />			
+			</testng>
+		    <antcall target="testngXsltReportCopyAndReportParserAndEmailReport">
+		    	<param name="testngXsltDir" value="${testngXslt.report.dir}${suite.web.Suite1_RegressionLoginLogout}"/>
+			</antcall>	
+
+			<!--suite 2 begin -->
+			<property name="suite.web.Suite2_AnnotationInvalidLoginTests" value="Suite2_AnnotationInvalidLoginTests" />
+			<testng classpath="${test.classpath}:${test.dest}" suitename="Suite2_AnnotationInvalidLoginTests" outputDir="test-output" >
+				<xmlfileset dir="." includes="suites/webSuites/Suite2_AnnotationInvalidLoginTests.xml" />			
+			</testng>
+		    <antcall target="testngXsltReportCopyAndReportParserAndEmailReport">
+		    	<param name="testngXsltDir" value="${testngXslt.report.dir}${suite.web.Suite2_AnnotationInvalidLoginTests}"/>
+			</antcall>	
+			
+		</target>
+		
+		<target name="testngXsltReportCopyAndReportParserAndEmailReport">
+			<!-- to copy previous suite result from test-output to TestngXSLTReports directory -->  
+			<mkdir dir="${testngXsltDir}">
+			</mkdir>
+			
+	        <xslt in="${ws.home}/test-output/testng-results.xml" style="src/xslt/testng-results.xsl" 
+	        	out="${testngXsltDir}/index.html" classpathref="test.c" processor="SaxonLiaison">
+	        	
+	        	<param name="testNgXslt.outputDir" expression="${testngXsltDir}" />
+	            <param name="testNgXslt.showRuntimeTotals" expression="true" />
+	            <param name="testNgXslt.sortTestCaseLinks" expression="true"  />
+	            <param name="testNgXslt.testDetailsFilter" expression="FAIL,SKIP,PASS,CONF,BY_CLASS" />
+	        </xslt>  <!-- end of TestngXslt Report -->
+			
+			<!-- Execute ReportParseAndGoogleDocUpdate -->
+			<testng classpath="${test.classpath}:${test.dest}" suitename="ReportParseAndGoogleDocUpdate" outputDir="test-output-GoogleParserReport" >
+				<xmlfileset dir="." includes="suites/webSuites/ReportParseAndGoogleDocUpdate.xml" />			
+			</testng>
+			
+			<!-- Email current suite report from test-output dir -->
+			<testng classpath="${test.classpath}:${test.dest}" suitename="SuiteEmail" outputDir="test-output-EmailReport" >
+				<xmlfileset dir="." includes="suites/webSuites/SuiteEmail.xml" />			
+			</testng>			
+		</target>
+	
+	
+	<path id="test.c">
+			<fileset dir="${ws.jars}" includes="*.jar">
+				<include name="mail.jar"/>
+				<include name="activation-1.0.2.jar"/>				
+			</fileset>
+	</path>
+
+	<!--  ========== Generating reports using Testng XSLT utility for single suite only ==============   -->
+    <target name="report" depends="run">
+    	<!-- TestngXslt report -->
+    	<mkdir dir="${testngXslt.report.dir}">
+    	</mkdir>
+    	
+    	<!-- to copy previous suite result to TestngXslt report folder -->  
+        <xslt in="${ws.home}/test-output/testng-results.xml" style="src/xslt/testng-results.xsl" 
+        	out="${testngXslt.report.dir}/index.html" classpathref="test.c" processor="SaxonLiaison">
+        	
+        	<param name="testNgXslt.outputDir" expression="${testngXslt.report.dir}" />
+            <param name="testNgXslt.showRuntimeTotals" expression="true" />
+            <param name="testNgXslt.sortTestCaseLinks" expression="true"  />
+            <param name="testNgXslt.testDetailsFilter" expression="FAIL,SKIP,PASS,CONF,BY_CLASS" />
+        </xslt>  <!-- end of TestngXslt Report -->
+    </target>
+	
+	<target name="RunAndViewReport" depends="report"> 
+	        <exec executable="${browser}" spawn="yes"> 
+	       <arg line="'file:///${testngXslt.report.dir}/index.html'" /> 
+	      </exec>
+	     </target>
+    
+	<target name="sendMail" depends="RunAndViewReport">
+	        <zip destfile="${testngXslt.report.dir}/Report.zip" basedir="${testngXslt.report.dir}"/>
+	        <mail mailhost="smtp.gmail.com" mailport="465" subject="Notification of TESTNG build result" ssl="false" user="abc@gmail.com" password="abc">
+	            <from address="abc@gmail.com"/>
+	            <to address="xyz@gmail.com"/>
+	            <message>The build has finished. A details report of this build is attached</message>
+	            <attachments>
+	                <fileset dir="testngXslt.report.dir">
+	                    <include name="**/*.zip"/>
+	                </fileset>
+	            </attachments>
+	        </mail>
+	    </target>
+	
+	
+	  <target name="install-jars" description="Install ANT optional jars">
+	        <get dest="${ws.home}/lib/mail.jar" src="file:///${ws.home}/lib/mail.jar"/>
+			<fileset dir="${ws.jars}" includes="*.jar">
+				<include name="mail.jar"/>
+				<include name="activation-1.0.2.jar"/>				
+			</fileset>
+	  </target>
+	
+</project>
